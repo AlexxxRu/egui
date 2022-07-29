@@ -46,6 +46,7 @@ pub fn run(app_name: &str, native_options: &epi::NativeOptions, app_creator: epi
     let event_loop = winit::event_loop::EventLoop::with_user_event();
     let (gl_window, gl) = create_display(native_options, window_builder, &event_loop);
     let gl = std::rc::Rc::new(gl);
+    let gl_window = std::rc::Rc::new(gl_window);
 
     let mut painter = egui_glow::Painter::new(gl.clone(), None, "")
         .unwrap_or_else(|error| panic!("some OpenGL error occurred {}\n", error));
@@ -69,6 +70,7 @@ pub fn run(app_name: &str, native_options: &epi::NativeOptions, app_creator: epi
         integration_info: integration.frame.info(),
         storage: integration.frame.storage(),
         gl: gl.clone(),
+        win: gl_window.clone(),
     });
 
     if app.warm_up_enabled() {

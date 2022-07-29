@@ -28,6 +28,9 @@ pub struct CreationContext<'s> {
     /// The [`glow::Context`] allows you to initialize OpenGL resources (e.g. shaders) that
     /// you might want to use later from a [`egui::PaintCallback`].
     pub gl: std::rc::Rc<glow::Context>,
+
+    /// Direct handle to winit::Window
+    pub win: std::rc::Rc<glutin::ContextWrapper<glutin::PossiblyCurrent, winit::window::Window>>,
 }
 
 // ----------------------------------------------------------------------------
